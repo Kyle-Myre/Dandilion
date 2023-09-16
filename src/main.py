@@ -29,6 +29,9 @@ class App(ct.CTk):
         self.Download_Button = ct.CTkButton(self , text="Download" , command=lambda:print(self.options.get()))
         self.Download_Button.pack(padx=5 , pady=5)
 
+        self.Progress = "";
+        self.ProgressBar = "";
+
         self.mainloop()
 
 

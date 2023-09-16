@@ -1,8 +1,14 @@
-import customtkinter as ct
 from tkinter import StringVar
+from pytube import YouTube 
+import customtkinter as ct
+
 
 
 class App(ct.CTk):
+
+    _SETTINGS = {
+        # pass
+    }
 
     ct.set_appearance_mode("System")
     ct.set_default_color_theme("green")
@@ -33,6 +39,5 @@ class App(ct.CTk):
         self.ProgressBar = "";
 
         self.mainloop()
-
 
 App()

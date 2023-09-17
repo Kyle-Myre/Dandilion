@@ -1,7 +1,9 @@
 # Dandilion
 
-<img title="a title" alt="Alt text" src="assets\Apple.png">
-<p style="text-align: center;">Open source python youtube MP3 & MP4 Downloader</p>
+<div align="center">
+    <img title="Green Apple" alt="Just a green apple" src="assets\Apple.png" width="50%"/>
+    <p style="text-align: center;">Open source python youtube MP3 & MP4 Downloader</p>
+</div>
 
 ## Installation
 

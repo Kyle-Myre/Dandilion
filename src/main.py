@@ -1,4 +1,4 @@
-from tkinter import StringVar
+from tkinter import StringVar , PhotoImage
 import customtkinter as ctk
 from pytube import YouTube
 import pytube.request
@@ -10,6 +10,10 @@ ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("green")
 
 App = ctk.CTk()
+
+full_image_path = os.path.join(os.getcwd() , "assets" "Icon.ico")
+
+App.iconbitmap(full_image_path)
 
 def Download(link:str):
 

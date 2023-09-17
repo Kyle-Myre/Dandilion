@@ -1,4 +1,4 @@
-from tkinter import StringVar , PhotoImage
+from tkinter import StringVar
 import customtkinter as ctk
 from pytube import YouTube
 import pytube.request

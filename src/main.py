@@ -1,34 +1,10 @@
 from tkinter import StringVar
 from pytube import YouTube 
 import customtkinter as ct
+from threading import Thread
+from time import sleep
 
-class Y_Options:
-    
-    def __init__(self ,  output:str) -> None:
-        self.output = output
 
-    def Give(self):
-        return {
-            "format" : "bestaudio" ,
-            "outtmpl" : self.output ,
-            "noplaylist" : True ,
-            'continue_dl': True,
-            'postprocessors': [ 
-                {
-                    'key': 'FFmpegExtractAudio',
-                    'preferredcodec': 'wav',
-                    'preferredquality': '192', 
-                }
-            ]
-
-        }   
-
-class Convertor:
-    @staticmethod
-    def Download(link:str , options:dict=None):
-        youtube_obj = YouTube(link)
-        youtube_obj.streams.first().download("./output")
-        
 class App(ct.CTk):
 
     _SETTINGS = {
@@ -57,12 +33,34 @@ class App(ct.CTk):
         self.Type = ct.CTkOptionMenu(self , variable=self.options , values=self.__Types)
         self.Type.pack(padx=5 , pady=5)
 
-        self.Download_Button = ct.CTkButton(self , text="Download" , command=lambda:Convertor.Download(self.value.get()))
+        self.FinishLabel = ct.CTkLabel(self,text="")
+        self.FinishLabel.pack()
+
+        print(self.FinishLabel._fg_color)
+
+        self.Download_Button = ct.CTkButton(self , text="Download" , command=lambda:self.Download(self.value.get()))
         self.Download_Button.pack(padx=5 , pady=5)
 
-        self.Progress = "";
-        self.ProgressBar = "";
+        self.Progress = ct.CTkLabel(self,text="0%")
+        self.Progress.pack()
+
+        self.ProgressBar = ct.CTkProgressBar(self , width=350)
+        self.ProgressBar.pack()
 
         self.mainloop()
+
+    def Download(self , link:str):
+        try:
+            
+            self.FinishLabel.configure(text="" , fg_color="transparent")
+            Y_obj = YouTube(link , use_oauth=False , allow_oauth_cache=True)
+
+            video = Y_obj.streams.get_highest_resolution()
+            video.download("./output")
+            
+            self.FinishLabel.configure(text="Finished", fg_color="transparent")
+
+        except Exception as error:
+            self.FinishLabel.configure(text=error , fg_color="red")
 
 App()

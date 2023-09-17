@@ -1,6 +1,9 @@
 # Dandilion
 
-Open source python youtube MP3 & MP4 Downloader
+![Drag Racing](assets\Apple.png)
+
+<p style="text-align: center;">Open source python youtube MP3 & MP4 Downloader
+</p>
 
 ## Installation
 

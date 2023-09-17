@@ -1,8 +1,18 @@
 from tkinter import StringVar
 import customtkinter as ctk
+
 from pytube import YouTube
 import pytube.request
+
 import os
+
+try:
+
+    from ctypes import windll , byref , sizeof , c_int
+
+except:
+    pass
+
 
 pytube.request.default_range_size = 9437184 #MB
 
@@ -10,6 +20,21 @@ ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("green")
 
 App = ctk.CTk()
+
+try:
+    HWND = windll.user32.GetParent(App.winfo_id())
+
+    title_bar_color = 0xFFFFFF
+
+    windll.dwmapi.DwmSetWindowAttribute(
+        HWND , 
+        35 , 
+        byref(c_int(title_bar_color)) , 
+        sizeof(c_int)
+    )
+except:
+    pass
+
 
 full_image_path = os.path.join(os.getcwd() , "assets" , "Icon.ico")
 

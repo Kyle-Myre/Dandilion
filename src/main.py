@@ -11,7 +11,7 @@ ctk.set_default_color_theme("green")
 
 App = ctk.CTk()
 
-full_image_path = os.path.join(os.getcwd() , "assets" "Icon.ico")
+full_image_path = os.path.join(os.getcwd() , "assets" , "Icon.ico")
 
 App.iconbitmap(full_image_path)
 

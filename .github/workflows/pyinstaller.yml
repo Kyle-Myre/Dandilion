@@ -3,7 +3,7 @@ name: Build Upload Dandilion
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:

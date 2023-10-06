@@ -4,12 +4,12 @@ import customtkinter as ctk
 from pytube import YouTube
 import pytube.request
 
+from threading import Thread
+
 import os
 
 try:
-
     from ctypes import windll , byref , sizeof , c_int
-
 except:
     pass
 
@@ -89,7 +89,7 @@ def on_progress(stream, chunk, bytes_remaining):
     bytes_downloaded = total_size - bytes_remaining
     pct_completed = bytes_downloaded / total_size * 100
     
-    Progress.configure(text=f"{str(pct_completed)}%")
+    Progress.configure(text=f"{str(round(pct_completed))}%")
     Progress.update()
 
     ProgressBar.set(float(pct_completed) / 100)
@@ -117,7 +117,10 @@ Type.pack(padx=5 , pady=5)
 FinishLabel = ctk.CTkLabel(App,text="")
 FinishLabel.pack()
 
-Download_Button = ctk.CTkButton(App , text="Download" , command=lambda:Download(value.get()))
+
+Download_Button = ctk.CTkButton(App , text="Download" , command=lambda:Thread(target=Download , args=(value.get() , )).start())
+
+
 Download_Button.pack(padx=5 , pady=5)
 
 VideoTitle = ctk.CTkLabel(App , text="")

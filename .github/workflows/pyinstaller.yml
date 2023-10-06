@@ -1,21 +1,34 @@
-name : Pyinstaller
-
+name: Build Upload Dandilion
 
 on:
   push:
     branches:
       - main
-    
 
 jobs:
-  pyinstaller-build:
-    runs-on: <windows-latest / ubuntu-latest / ..... etc>
+  build:
+    runs-on: windows-latest
+
     steps:
-      - name: Create Executable
-        uses: sayyid5416/pyinstaller@v1
-        with:
-          python_ver: '3.10'
-          spec: 'build.spec'
-          requirements: 'requirements.txt'
-          upload_exe_with_name: 'Dandilion'
-          options: --onefile, --name "Dandilion", --windowed,  --icon "assets/Icon.ico"
+    - name: Checkout code
+      uses: actions/checkout@v4.1.0
+
+    - name: Set up Python
+      uses: actions/setup-python@v4.7.1
+      with:
+        python-version: 3.12.0
+
+    - name: Install Python dependencies
+      run: |
+        pip install -r requirements.txt
+      working-directory: ${{ github.workspace }}
+
+    - name: Build Dandilion
+      run: |
+        pyinstaller --noconfirm --onedir --windowed --icon "assets/Icon.ico" --name "Dandilion" --version-file "version.yml" --add-data "assets/Apple.png;."  "src/main.py"
+        
+    - name: Upload MSFONT artifacts
+      uses: actions/upload-artifact@v3.1.3
+      with:
+        name: Dandilion
+        path: dist/Dandilion

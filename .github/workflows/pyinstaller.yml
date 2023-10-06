@@ -1,6 +1,11 @@
+name : Pyinstaller
+
+
 on:
-  schedule:
-    - cron: '* */1 * * *'
+  push:
+    branches:
+      - main
+    
 
 jobs:
   pyinstaller-build:

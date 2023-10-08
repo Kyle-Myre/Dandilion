@@ -25,7 +25,7 @@ jobs:
 
     - name: Build Dandilion
       run: |
-        pyinstaller --noconfirm --onedir --windowed --icon "assets/Icon.ico" --name "Dandilion" --version-file "version.txt" --add-data "assets/Apple.png;."  "src/main.py"
+        pyinstaller --noconfirm --onedir --windowed --icon "assets/Icon.ico" --name "Dandilion" --version-file "version.txt" --add-data "assets/Apple.png;assets/Icon.ico"  "src/main.py"
         
     - name: Upload MSFONT artifacts
       uses: actions/upload-artifact@v3.1.3

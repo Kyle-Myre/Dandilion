@@ -7,11 +7,11 @@
   },
   {
    "optionDest": "filenames",
-   "value": "D:/Media/Local Projects/Dandilion/src/main.py"
+   "value": "C:/Users/ULTRAPC/OneDrive/Computer Science/Python/User's Interface/Dandilion/src/main.py"
   },
   {
    "optionDest": "onefile",
-   "value": true
+   "value": false
   },
   {
    "optionDest": "console",
@@ -19,15 +19,11 @@
   },
   {
    "optionDest": "icon_file",
-   "value": "D:/Media/Local Projects/Dandilion/assets/Icon.ico"
+   "value": "C:/Users/ULTRAPC/OneDrive/Computer Science/Python/User's Interface/Dandilion/assets/Icon.ico"
   },
   {
    "optionDest": "name",
    "value": "Dandilion"
-  },
-  {
-   "optionDest": "ascii",
-   "value": false
   },
   {
    "optionDest": "clean_build",
@@ -47,11 +43,7 @@
   },
   {
    "optionDest": "version_file",
-   "value": "D:/Media/Local Projects/Dandilion/version.txt"
-  },
-  {
-   "optionDest": "embed_manifest",
-   "value": true
+   "value": "C:/Users/ULTRAPC/OneDrive/Computer Science/Python/User's Interface/Dandilion/version.txt"
   },
   {
    "optionDest": "uac_admin",
@@ -62,11 +54,7 @@
    "value": false
   },
   {
-   "optionDest": "win_private_assemblies",
-   "value": false
-  },
-  {
-   "optionDest": "win_no_prefer_redirects",
+   "optionDest": "argv_emulation",
    "value": false
   },
   {
@@ -74,8 +62,8 @@
    "value": false
   },
   {
-   "optionDest": "argv_emulation",
-   "value": false
+   "optionDest": "datas",
+   "value": "C:/Users/ULTRAPC/OneDrive/Computer Science/Python/User's Interface/Dandilion/assets;assets/"
   }
  ],
  "nonPyinstallerOptions": {

@@ -36,8 +36,7 @@ except:
     pass
 
 
-full_image_path = os.path.join(os.getcwd() , "assets" , "Icon.ico")
-
+full_image_path = os.path.join(os.getcwd() , "static" , "Icon.ico")
 App.iconbitmap(full_image_path)
 
 def Download(link:str):

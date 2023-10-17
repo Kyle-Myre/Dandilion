@@ -1,18 +1,17 @@
-from tkinter import StringVar
-import customtkinter as ctk
-from pytube import YouTube
-
-import pytube.request
-import time
-
-from threading import Thread
-import os
+# imports
 
 try:
-    from ctypes import windll , byref , sizeof , c_int
-except:
-    pass
+    from tkinter import StringVar
+    from threading import Thread
+    from pytube import YouTube
 
+    import customtkinter as ctk
+    import pytube.request
+    import os , time
+except (ImportError , ImportWarning) as err:
+    print(f"Something went wrong : {err}")
+
+#
 
 pytube.request.default_range_size = 9437184 #MB
 
@@ -21,31 +20,20 @@ ctk.set_default_color_theme("green")
 
 App = ctk.CTk()
 
-try:
-    HWND = windll.user32.GetParent(App.winfo_id())
-
-    title_bar_color = 0xFFFFFF
-
-    windll.dwmapi.DwmSetWindowAttribute(
-        HWND , 
-        35 , 
-        byref(c_int(title_bar_color)) , 
-        sizeof(c_int)
-    )
-except:
-    pass
-
 
 full_image_path = os.path.join(os.getcwd() , "static" , "Icon.ico")
 App.iconbitmap(full_image_path)
 
 def Download(link:str):
-    FinishLabel.configure(text="Fetching . . ." , text_color="#FFFF00" , bg_color="transparent")
+    FinishLabel.configure(text="Fetching . . ." , text_color="#FFFF00")
     time.sleep(3)
+
+    Y_obj = YouTube(link , use_oauth=False , allow_oauth_cache=True)
+    Y_obj.register_on_progress_callback(on_progress)
+
     if options.get() == "MP4":
         try:
-            Y_obj = YouTube(link , use_oauth=False , allow_oauth_cache=True)
-            Y_obj.register_on_progress_callback(on_progress)
+            
             video = Y_obj.streams.get_highest_resolution()
             VideoTitle.configure(text=video.title)
 
@@ -54,6 +42,8 @@ def Download(link:str):
             video.download("./output")
             
             FinishLabel.configure(text="Finished", text_color="green")
+            time.sleep(5)
+            FinishLabel.configure(text="")
 
         except Exception as error:
 
@@ -62,12 +52,11 @@ def Download(link:str):
     elif options.get() == "MP3":
         
         try:
-            FinishLabel.configure(text="" , fg_color="transparent")
-            Y_obj = YouTube(link , use_oauth=False , allow_oauth_cache=True)
-            Y_obj.register_on_progress_callback(on_progress)
-
+            
             video = Y_obj.streams.filter(only_audio=True).first()
             
+            FinishLabel.configure(text="Video founded")
+
             VideoTitle.configure(text=video.title)
             output_file = video.download("./output")
 
@@ -76,7 +65,9 @@ def Download(link:str):
 
             os.rename(output_file , new_file)
             
-            FinishLabel.configure(text="Finished", text_color="transparent")
+            FinishLabel.configure(text="Finished", text_color="green")
+            time.sleep(5)
+            FinishLabel.configure(text="")
 
         except Exception as error:
 

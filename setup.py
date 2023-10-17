@@ -1,7 +1,17 @@
 from cx_Freeze import setup, Executable
 
 files = ['static/Icon.ico','static/']
-build_options = {'packages': [], 'excludes': [] , 'include_files' : files}
+
+
+build_options = {
+    'build_exe': {
+        'packages': [], 
+        'excludes': [] , 
+        'include_files' : files
+    }
+}
+
+
 
 import sys
 base = 'Win32GUI' if sys.platform=='win32' else None
@@ -18,6 +28,6 @@ setup(
     name='Dandilion',
     version = '1.0',
     description = 'Dandilion',
-    options = {'build_exe': build_options},
+    options = build_options,
     executables = executables
 )

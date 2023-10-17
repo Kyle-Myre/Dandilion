@@ -28,7 +28,7 @@ git clone https://github.com/SikroxMemer/Dandilion.git
 3. Run the app:
 
 ```bash
-python main.py
+python src/main.py
 ```
 
 4. The application's graphical user interface (GUI) will open.
@@ -40,6 +40,15 @@ python main.py
 7. Click the "Download" button to start the download process.
 
 8. The downloaded file will be saved in the output directory.
+
+# Build
+
+- If you want to build to an executable run :
+
+```bash
+python setup.py build
+```
+*Note : you may encounter some minor bugs*
 
 ## Contribution
 

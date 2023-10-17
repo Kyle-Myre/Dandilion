@@ -1,11 +1,11 @@
 from tkinter import StringVar
 import customtkinter as ctk
-
 from pytube import YouTube
+
 import pytube.request
+import time
 
 from threading import Thread
-
 import os
 
 try:
@@ -40,26 +40,27 @@ full_image_path = os.path.join(os.getcwd() , "static" , "Icon.ico")
 App.iconbitmap(full_image_path)
 
 def Download(link:str):
-
+    FinishLabel.configure(text="Fetching . . ." , text_color="#FFFF00" , bg_color="transparent")
+    time.sleep(3)
     if options.get() == "MP4":
         try:
-
-            FinishLabel.configure(text="" , fg_color="transparent")
             Y_obj = YouTube(link , use_oauth=False , allow_oauth_cache=True)
             Y_obj.register_on_progress_callback(on_progress)
-
             video = Y_obj.streams.get_highest_resolution()
-
             VideoTitle.configure(text=video.title)
+
+            FinishLabel.configure(text="Video founded")
+
             video.download("./output")
             
-            FinishLabel.configure(text="Finished", fg_color="transparent")
+            FinishLabel.configure(text="Finished", text_color="green")
 
         except Exception as error:
 
-            FinishLabel.configure(text=error , fg_color="red")
+            FinishLabel.configure(text=error , text_color="red")
     
     elif options.get() == "MP3":
+        
         try:
             FinishLabel.configure(text="" , fg_color="transparent")
             Y_obj = YouTube(link , use_oauth=False , allow_oauth_cache=True)
@@ -75,11 +76,11 @@ def Download(link:str):
 
             os.rename(output_file , new_file)
             
-            FinishLabel.configure(text="Finished", fg_color="transparent")
+            FinishLabel.configure(text="Finished", text_color="transparent")
 
         except Exception as error:
 
-            FinishLabel.configure(text=error , fg_color="red")
+            FinishLabel.configure(text=error , text_color="red")
 
 
 def on_progress(stream, chunk, bytes_remaining):

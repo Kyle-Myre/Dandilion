@@ -4,7 +4,6 @@ try:
     from tkinter import StringVar
     from threading import Thread
     from pytube import YouTube
-
     import customtkinter as ctk
     import pytube.request
     import os , time
@@ -84,7 +83,6 @@ def on_progress(stream, chunk, bytes_remaining):
     Progress.update()
 
     ProgressBar.set(float(pct_completed) / 100)
-
 
 # UI
 __Types = ['MP3' , 'MP4']

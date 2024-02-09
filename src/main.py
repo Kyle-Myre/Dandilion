@@ -6,11 +6,10 @@ try:
     from pytube import YouTube
     import customtkinter as ctk
     import pytube.request
+    from tkinter import PhotoImage
     import os , time
 except (ImportError , ImportWarning) as err:
     print(f"Something went wrong : {err}")
-
-#
 
 pytube.request.default_range_size = 9437184 #MB
 
@@ -18,10 +17,13 @@ ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("green")
 
 App = ctk.CTk()
+full_image_path = os.path.join(os.getcwd() , "static" , "Apple.png")
 
-
-full_image_path = os.path.join(os.getcwd() , "static" , "Icon.ico")
-App.iconbitmap(full_image_path)
+try:
+    print(full_image_path)
+    App.iconphoto(False , PhotoImage(file=full_image_path))
+except:
+    ...
 
 def Download(link:str):
     FinishLabel.configure(text="Fetching . . ." , text_color="#FFFF00")

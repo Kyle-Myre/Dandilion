@@ -8,10 +8,9 @@ a = Analysis(
     datas=[('assets', 'assets')],
     hiddenimports=[],
     hookspath=[],
-    hooksconfig={},
     runtime_hooks=[],
     excludes=[],
-    noarchive=True,
+    noarchive=False,
 )
 pyz = PYZ(a.pure)
 

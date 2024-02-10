@@ -1,5 +1,7 @@
 # imports
 
+
+
 try:
     from tkinter import StringVar
     from threading import Thread
@@ -7,23 +9,28 @@ try:
     import customtkinter as ctk
     import pytube.request
     from tkinter import PhotoImage
+    from tkinter import Tk
+    from PIL import ImageTk , Image
     import os , time
+    from datetime import datetime
+    from rich.console import Console
 except (ImportError , ImportWarning) as err:
-    print(f"Something went wrong : {err}")
+    print(f"Missing Library Error : {err}")
 
 pytube.request.default_range_size = 9437184 #MB
+console = Console()
 
 ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("green")
 
+
+
 App = ctk.CTk()
-full_image_path = os.path.join(os.getcwd() , "static" , "Apple.png")
 
 try:
-    print(full_image_path)
-    App.iconphoto(False , PhotoImage(file=full_image_path))
+    App.iconbitmap('assets/Icon.ico')
 except:
-    ...
+    App.iconbitmap(os.path.join(os.getcwd() , 'src' , 'assets' , 'Icon.ico'))
 
 def Download(link:str):
     FinishLabel.configure(text="Fetching . . ." , text_color="#FFFF00")
@@ -126,4 +133,9 @@ ProgressBar.set(0)
 ProgressBar.pack()
 
 
-App.mainloop()
+def main():
+
+    console.print(f"[green]Dandilion[/] Has Started at {datetime.now()}")
+    App.mainloop()
+
+main()

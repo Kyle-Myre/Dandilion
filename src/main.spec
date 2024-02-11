@@ -4,10 +4,11 @@
 a = Analysis(
     ['main.py'],
     pathex=[],
-    binaries=[('assets/Icon.ico', 'ico')],
-    datas=[('assets', 'assets'), ('layouts', 'layouts')],
+    binaries=[('assets/public/Icon.ico', 'ico')],
+    datas=[('assets', 'assets')],
     hiddenimports=[],
     hookspath=[],
+    hooksconfig={},
     runtime_hooks=[],
     excludes=[],
     noarchive=False,
@@ -30,7 +31,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['assets\\Icon.ico'],
+    icon=['assets\\public\\Icon.ico'],
 )
 coll = COLLECT(
     exe,

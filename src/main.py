@@ -25,32 +25,19 @@ App = tk.Tk()
 icon_relative_path = ""
 
 
-icon_relative_path = os.path.join(os.path.dirname(__file__) , 'assets' , 'Icon.ico')
+icon_relative_path = os.path.join(os.path.dirname(
+    __file__), 'assets', 'public', 'Icon.ico')
 App.iconbitmap(icon_relative_path)
 
 if darkdetect.isDark():
-
-    try:
-        theme_relative_path = os.path.join(os.path.dirname(__file__) , 'layouts', 'Forest', 'forest-dark.tcl')
-        App.tk.call('source', theme_relative_path)
-    except:
-        theme_relative_path = os.path.join(os.path.dirname(__file__) , 'layouts', 'Forest', 'forest-dark.tcl')
-
-        App.tk.call('source', theme_relative_path)
-    
-
+    theme_relative_path = os.path.join(os.path.dirname(
+        __file__), 'assets', 'layouts', 'Forest', 'forest-dark.tcl')
+    App.tk.call('source', theme_relative_path)
     ttk.Style().theme_use('forest-dark')
-
 else:
-
-    try:
-        App.tk.call('source', os.path.realpath(os.path.join(
-        'layouts', 'Forest', 'forest-light.tcl')))
-    except:
-        App.tk.call('source', os.path.realpath(os.path.join(
-        'src', 'layouts', 'Forest', 'forest-light.tcl')))
-    
-
+    theme_relative_path = os.path.join(os.path.dirname(
+        __file__), 'assets', 'layouts', 'Forest', 'forest-light.tcl')
+    App.tk.call('source', theme_relative_path)
     ttk.Style().theme_use('forest-light')
 
 
@@ -146,7 +133,7 @@ Type.pack(padx=5, pady=5)
 FinishLabel = ttk.Label(App, text="")
 FinishLabel.pack()
 
-Download_Button = ttk.Button(App, text="Download", style='Accent.TButton' , command=lambda: Thread(
+Download_Button = ttk.Button(App, text="Download", style='Accent.TButton', command=lambda: Thread(
     target=Download, args=(value.get(), )).start())
 Download_Button.pack(padx=5, pady=5)
 
@@ -163,7 +150,7 @@ def main():
 
     console.print("[yellow]{}[/] Loaded".format(icon_relative_path))
     console.print("[yellow]{}[/] Loaded".format(theme_relative_path))
-    
+
     App.mainloop()
 
 

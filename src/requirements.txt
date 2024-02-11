@@ -1,4 +1,5 @@
 customtkinter
 pytube
-pyinstaller
 ffmpeg
+sv-ttk
+darkdetect

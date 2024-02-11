@@ -1,85 +1,114 @@
 # imports
 
-
-
 try:
+
     from tkinter import StringVar
     from threading import Thread
     from pytube import YouTube
-    import customtkinter as ctk
     import pytube.request
-    from tkinter import PhotoImage
-    from tkinter import Tk
-    from PIL import ImageTk , Image
-    import os , time
+    import os
+    import time
     from datetime import datetime
     from rich.console import Console
-except (ImportError , ImportWarning) as err:
+    import darkdetect
+    import tkinter as tk
+    from tkinter import ttk
+    import sv_ttk
+
+except (ImportError, ImportWarning) as err:
     print(f"Missing Library Error : {err}")
 
-pytube.request.default_range_size = 9437184 #MB
+pytube.request.default_range_size = 9437184  # MB
 console = Console()
 
-ctk.set_appearance_mode("System")
-ctk.set_default_color_theme("green")
-
-
-
-App = ctk.CTk()
+App = tk.Tk()
 
 try:
-    App.iconbitmap('assets/Icon.ico')
+    os.path.realpath(App.iconbitmap('assets/Icon.ico'))
 except:
-    App.iconbitmap(os.path.join(os.getcwd() , 'src' , 'assets' , 'Icon.ico'))
+    App.iconbitmap(os.path.realpath(os.path.join(os.getcwd(), 'src' , 'assets' , 'Icon.ico')))
+   
 
-def Download(link:str):
-    FinishLabel.configure(text="Fetching . . ." , text_color="#FFFF00")
+if darkdetect.isDark():
+
+    try:
+        App.tk.call('source', os.path.realpath(os.path.join(
+        'layouts', 'Forest', 'forest-dark.tcl')))
+    except:
+        App.tk.call('source', os.path.realpath(os.path.join(
+        'src', 'layouts', 'Forest', 'forest-dark.tcl')))
+    
+
+    ttk.Style().theme_use('forest-dark')
+
+else:
+
+    try:
+        App.tk.call('source', os.path.realpath(os.path.join(
+        'layouts', 'Forest', 'forest-light.tcl')))
+    except:
+        App.tk.call('source', os.path.realpath(os.path.join(
+        'src', 'layouts', 'Forest', 'forest-light.tcl')))
+    
+
+    ttk.Style().theme_use('forest-light')
+
+
+def Download(link: str):
+    FinishLabel.configure(text="Fetching . . .", foreground="#FFFF00")
     time.sleep(3)
 
-    Y_obj = YouTube(link , use_oauth=False , allow_oauth_cache=True)
+    if link == "":
+        FinishLabel.configure(text="Empty Link")
+        time.sleep(2)
+        FinishLabel.configure(text="")
+
+        return None
+
+    Y_obj = YouTube(link, use_oauth=False, allow_oauth_cache=True)
     Y_obj.register_on_progress_callback(on_progress)
 
     if options.get() == "MP4":
         try:
-            
+
             video = Y_obj.streams.get_highest_resolution()
             VideoTitle.configure(text=video.title)
 
             FinishLabel.configure(text="Video founded")
 
             video.download("./output")
-            
-            FinishLabel.configure(text="Finished", text_color="green")
+
+            FinishLabel.configure(text="Finished", foreground="green")
             time.sleep(5)
             FinishLabel.configure(text="")
 
         except Exception as error:
 
-            FinishLabel.configure(text=error , text_color="red")
-    
+            FinishLabel.configure(text=error, foreground="red")
+
     elif options.get() == "MP3":
-        
+
         try:
-            
+
             video = Y_obj.streams.filter(only_audio=True).first()
-            
+
             FinishLabel.configure(text="Video founded")
 
             VideoTitle.configure(text=video.title)
             output_file = video.download("./output")
 
-            name , ext = os.path.splitext(output_file)
+            name, ext = os.path.splitext(output_file)
             new_file = name + ".mp3"
 
-            os.rename(output_file , new_file)
-            
-            FinishLabel.configure(text="Finished", text_color="green")
+            os.rename(output_file, new_file)
+
+            FinishLabel.configure(text="Finished", foreground="green")
             time.sleep(5)
             FinishLabel.configure(text="")
 
         except Exception as error:
 
-            FinishLabel.configure(text=error , text_color="red")
+            FinishLabel.configure(text=error, foreground="red")
 
 
 def on_progress(stream, chunk, bytes_remaining):
@@ -87,55 +116,51 @@ def on_progress(stream, chunk, bytes_remaining):
     total_size = stream.filesize
     bytes_downloaded = total_size - bytes_remaining
     pct_completed = bytes_downloaded / total_size * 100
-    
+
     Progress.configure(text=f"{str(round(pct_completed))}%")
     Progress.update()
 
-    ProgressBar.set(float(pct_completed) / 100)
 
 # UI
-__Types = ['MP3' , 'MP4']
-options = StringVar(value=__Types[0])
+__Types = ["", "MP3", "MP4"]
+options = StringVar(App)
+
+options.set('Select An Option')
+
 value = StringVar()
 
 App.geometry("480x320")
-App.resizable(False , False)
+App.resizable(False, False)
 
 App.title("Dandilion")
 
-Entry_Label = ctk.CTkLabel(App , text="Put a Video Link")
-Entry_Label.pack(padx=5 , pady=5)
+Entry_Label = ttk.Label(App, text="Put a Video Link")
+Entry_Label.pack(padx=5, pady=5)
 
-Entry = ctk.CTkEntry(App , width=370 , height=25 , textvariable=value)
-Entry.pack(padx=5 , pady=5)
+Entry = ttk.Entry(App, width=370, textvariable=value)
+Entry.pack(padx=10, pady=10)
 
-Type = ctk.CTkOptionMenu(App , variable=options , values=__Types)
-Type.pack(padx=5 , pady=5)
+Type = ttk.OptionMenu(App, options, *__Types)
+Type.pack(padx=5, pady=5)
 
-FinishLabel = ctk.CTkLabel(App,text="")
+FinishLabel = ttk.Label(App, text="")
 FinishLabel.pack()
 
+Download_Button = ttk.Button(App, text="Download", style='Accent.TButton' , command=lambda: Thread(
+    target=Download, args=(value.get(), )).start())
+Download_Button.pack(padx=5, pady=5)
 
-Download_Button = ctk.CTkButton(App , text="Download" , command=lambda:Thread(target=Download , args=(value.get() , )).start())
-
-
-Download_Button.pack(padx=5 , pady=5)
-
-VideoTitle = ctk.CTkLabel(App , text="")
+VideoTitle = ttk.Label(App, text="")
 VideoTitle.pack()
 
-Progress = ctk.CTkLabel(App,text="0%")
+Progress = ttk.Label(App, text="0%")
 Progress.pack()
-
-ProgressBar = ctk.CTkProgressBar(App , width=350)
-ProgressBar.set(0)
-
-ProgressBar.pack()
 
 
 def main():
 
-    console.print(f"[green]Dandilion[/] Has Started at {datetime.now()}")
+    console.print(f"[blue]Dandilion[/] Has Started at {datetime.now()}")
     App.mainloop()
+
 
 main()

@@ -13,7 +13,6 @@ try:
     import darkdetect
     import tkinter as tk
     from tkinter import ttk
-    import sv_ttk
 
 except (ImportError, ImportWarning) as err:
     print(f"Missing Library Error : {err}")
@@ -23,20 +22,21 @@ console = Console()
 
 App = tk.Tk()
 
-try:
-    os.path.realpath(App.iconbitmap('assets/Icon.ico'))
-except:
-    App.iconbitmap(os.path.realpath(os.path.join(os.getcwd(), 'src' , 'assets' , 'Icon.ico')))
-   
+icon_relative_path = ""
+
+
+icon_relative_path = os.path.join(os.path.dirname(__file__) , 'assets' , 'Icon.ico')
+App.iconbitmap(icon_relative_path)
 
 if darkdetect.isDark():
 
     try:
-        App.tk.call('source', os.path.realpath(os.path.join(
-        'layouts', 'Forest', 'forest-dark.tcl')))
+        theme_relative_path = os.path.join(os.path.dirname(__file__) , 'layouts', 'Forest', 'forest-dark.tcl')
+        App.tk.call('source', theme_relative_path)
     except:
-        App.tk.call('source', os.path.realpath(os.path.join(
-        'src', 'layouts', 'Forest', 'forest-dark.tcl')))
+        theme_relative_path = os.path.join(os.path.dirname(__file__) , 'layouts', 'Forest', 'forest-dark.tcl')
+
+        App.tk.call('source', theme_relative_path)
     
 
     ttk.Style().theme_use('forest-dark')
@@ -160,6 +160,10 @@ Progress.pack()
 def main():
 
     console.print(f"[blue]Dandilion[/] Has Started at {datetime.now()}")
+
+    console.print("[yellow]{}[/] Loaded".format(icon_relative_path))
+    console.print("[yellow]{}[/] Loaded".format(theme_relative_path))
+    
     App.mainloop()
 
 

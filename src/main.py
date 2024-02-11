@@ -31,12 +31,12 @@ App.iconbitmap(icon_relative_path)
 
 if darkdetect.isDark():
     theme_relative_path = os.path.join(os.path.dirname(
-        __file__), 'assets', 'layouts', 'Forest', 'forest-dark.tcl')
+        __file__), 'assets', 'layouts', 'themes', 'Forest' , 'forest-dark.tcl')
     App.tk.call('source', theme_relative_path)
     ttk.Style().theme_use('forest-dark')
 else:
     theme_relative_path = os.path.join(os.path.dirname(
-        __file__), 'assets', 'layouts', 'Forest', 'forest-light.tcl')
+        __file__), 'assets', 'layouts', 'themes', 'Forest' , 'forest-light.tcl')
     App.tk.call('source', theme_relative_path)
     ttk.Style().theme_use('forest-light')
 

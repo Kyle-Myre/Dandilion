@@ -3,3 +3,4 @@ pytube
 ffmpeg
 sv-ttk
 darkdetect
+rich

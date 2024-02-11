@@ -8,7 +8,6 @@ a = Analysis(
     datas=[('assets', 'assets'), ('layouts', 'layouts')],
     hiddenimports=[],
     hookspath=[],
-    hooksconfig={},
     runtime_hooks=[],
     excludes=[],
     noarchive=False,

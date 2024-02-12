@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+        <nav class="flex flex-row align-baseline justify-between bg-slate-950">
+            <div class="m-2 flex flex-row">
+                <img src="{{url_for('static' , filename='Apple.png')}}" class="w-10" alt="">
+                <h1 class="text-2xl text-gray-100">
+                    Dandilion
+                </h1>
+            </div>
+            <div class="flex flex-row m-1 justify-evenly text-green-600">
+                <a class="m-2 text-xl visited:text-green-400" href="https://github.com/SikroxMemer">Github</a>
+                <a class="m-2 text-xl visited:text-green-400" href="https://github.com/SikroxMemer/Dandilion">Wiki</a>
+            </div>
+        </nav>
+    {% endblock content %}
+</body>
+</html>

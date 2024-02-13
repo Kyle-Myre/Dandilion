@@ -5,38 +5,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 </head>
 
 <body class="bg-slate-500">
-    <section class="m-3 p-5 flex flex-col bg-slate-200 rounded-md">
+    <main class="flex justify-center align-middle flex-col">
+        <section class="m-auto mt-5 mr-5 ml-5 p-5 flex shadow-md flex-col bg-slate-200 rounded-md">
+            <div class="p-3">
+                <h1 class="text-xl">Links Section</h1>
+                <p class="text-justify">Try Running some links trough the input bellow.
+                    But notice that you may find some videos that are not correctly
+                    downloaded this is due to pytube library being innacurate.
+                </p>
+            </div>
+            <form action="/convert" class="flex flex-row" class="p-3" method="post">
+                <input type="text" class="border-0 rounded-md p-2 m-1" name="url">
+                <select name="option"
+                    class="w-32 m-1 rounded-md text-center border-0 selection:border-0 active:border-0 focus:border-0">
+                    <option value="MP3">MP3</option>
+                    <option value="MP4">MP4</option>
+                </select>
+                <input type="submit" class="bg-green-600 m-1 w-20 rounded-md hover:bg-green-500 text-white" />
+            </form>
 
-        <div class="p-3">
-            <h1 class="text-xl">Links Section</h1>
-            <p class="text-justify">Try Running some links trough the input bellow.
-                But notice that you may find some videos that are not correctly
-                downloaded this is due to pytube library being innacurate.
-            </p>      
-        </div>
+            {% if value %}
+                {% if value['type'] == 'MP4' %}
+                <a href="{{ url_for('static' , filename=value['anchor']) }}"
+                    class="bg-green-600 m-1 p-2 text-white w-20 rounded-md hover:bg-green-50" download>
+                    <button class="bg-green-600 m-1 w-20 rounded-md hover:bg-green-500 text-white">Download</button>
+                </a>
+                {% else %}
+                <a href="{{ url_for('static' , filename=value['anchor']) }}" download>
+                    <button class="bg-green-600 m-1 w-20 rounded-md hover:bg-green-500 text-white">Download</button>
+                </a>
+                {% endif %}
 
-        <form action="/convert" class="flex flex-row" class="p-3" method="post">
-            <input type="text" class="border-0 rounded-md p-2 m-1" name="url">
-            <select name="option" class="w-32 m-1 rounded-md text-center border-0 selection:border-0 active:border-0 focus:border-0">
-                <option value="MP3">MP3</option>
-                <option value="MP4">MP4</option>
-            </select>
-            <input type="submit" class="bg-green-600 m-1 w-20 rounded-md hover:bg-green-500 text-white" />
-        </form>
-
-        {% if value %}
-            {% if value['type'] == 'MP4' %}
-                <a href="{{ url_for('static' , filename=value['anchor']) }}" class="bg-green-600 m-1 p-2 text-white w-20 rounded-md hover:bg-green-50" download>Download</a>
-            {% else %}
-                <a href="{{ url_for('static' , filename=value['anchor']) }}" class="bg-green-600 m-1 p-2 w-20  text-whit rounded-md hover:bg-green-50" download></a>
             {% endif %}
+        </section>
+        {% if value %}
+        <section class="m-auto mt-5 mr-5 ml-5 p-5 flex shadow-md flex-col bg-slate-200 rounded-md">
+            <p><span class="text-green-600">Status :</span> {{value['status']}}</p>
+            <p><span class="text-green-600">Type   :</span> {{value['type']}}</p>
+            <p><span class="text-green-600">Anchor :</span> {{value['anchor']}}</p>
+        </section>
         {% endif %}
-
-    </section>
+    </main>
 </body>
 
 </body>

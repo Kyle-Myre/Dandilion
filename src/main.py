@@ -1,7 +1,5 @@
 # imports
-
 try:
-
     from tkinter import StringVar
     from threading import Thread
     from pytube import YouTube
@@ -29,17 +27,9 @@ icon_relative_path = os.path.join(os.path.dirname(__file__), 'assets', 'public',
 
 App.iconbitmap(icon_relative_path)
 
-if darkdetect.isDark():
-    theme_relative_path = os.path.join(os.path.dirname(
-        __file__), 'assets', 'themes', 'Forest' , 'forest-dark.tcl')
-    App.tk.call('source', theme_relative_path)
-    ttk.Style().theme_use('forest-dark')
-else:
-    theme_relative_path = os.path.join(os.path.dirname(
-        __file__), 'assets', 'themes', 'Forest' , 'forest-light.tcl')
-    App.tk.call('source', theme_relative_path)
-    ttk.Style().theme_use('forest-light')
-
+theme_relative_path = os.path.join(os.path.dirname(__file__), 'assets', 'themes', 'forest-dark.tcl')
+App.tk.call('source', theme_relative_path)
+ttk.Style().theme_use('forest-dark')
 
 def Download(link: str):
     FinishLabel.configure(text="Fetching . . .", foreground="#FFFF00")

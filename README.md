@@ -1,7 +1,7 @@
 # Dandilion
 
 <div align="center">
-    <img title="Green Apple" alt="Just a green apple" src="src\assets\Apple.png" width="50%"/>
+    <img title="Green Apple" alt="Just a green apple" src="src/assets/public/Apple.png" width="50%"/>
     <p style="text-align: center;">Open source python youtube MP3 & MP4 Downloader</p>
 </div>
 

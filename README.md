@@ -1,10 +1,5 @@
 # Dandilion
 
-<div align="center">
-    <img title="Green Apple" alt="Just a green apple" src="src/assets/public/Apple.png" width="50%"/>
-    <p style="text-align: center;">Open source python youtube MP3 & MP4 Downloader</p>
-</div>
-
 ## Installation
 
 Before running the app, make sure you have the required external modules installed. You can install them using the following command:
@@ -41,14 +36,6 @@ python src/main.py
 
 8. The downloaded file will be saved in the output directory.
 
-# Build
-
-- If you want to build to an executable run :
-
-```bash
-python setup.py build
-```
-*Note : you may encounter some minor bugs*
 
 ## Contribution
 
